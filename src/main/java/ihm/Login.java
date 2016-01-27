@@ -4,15 +4,20 @@ import java.awt.EventQueue;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import db.Database;
+
 import java.awt.Color;
 import javax.swing.JTextField;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.SQLException;
 
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 public class Login extends JFrame {
@@ -27,8 +32,17 @@ public class Login extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					Login frame = new Login();
+					final Login frame = new Login();
 					frame.setVisible(true);
+					frame.connectButton.addActionListener(new ActionListener() {			
+						public void actionPerformed(ActionEvent e) {
+								if(frame.connect()){
+									ListeReservations lr = new ListeReservations();
+									lr.setVisible(true);
+									frame.dispose();
+								}
+						}
+					});
 				} catch (Exception e) {
 					e.printStackTrace();
 				}
@@ -40,6 +54,9 @@ public class Login extends JFrame {
 	 * Create the frame.
 	 */
 	public Login() {
+		Database.db_connect();
+		this.setIconImage(new ImageIcon("car.gif").getImage());
+		this.setTitle("Location de voitures - Login");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 600);
 		contentPane = new JPanel();
@@ -56,6 +73,7 @@ public class Login extends JFrame {
 		user.setColumns(10);
 		
 		pass = new JPasswordField();
+		pass.setHorizontalAlignment(SwingConstants.CENTER);
 		pass.setBounds(125, 200, 150, 30);
 		contentPane.add(pass);
 		
@@ -79,11 +97,15 @@ public class Login extends JFrame {
 		connectButton.setFont(new Font("Calibri", Font.PLAIN, 18));
 		connectButton.setBounds(125, 275, 150, 30);
 		contentPane.add(connectButton);
-		connectButton.addActionListener(new ActionListener() {			
-			public void actionPerformed(ActionEvent e) {
-								
-			}
-		});
 	}
 
+	public boolean connect(){
+		try {
+			return Database.connectUser(user.getText(), String.valueOf(pass.getPassword()));
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return false;
+	}
 }
