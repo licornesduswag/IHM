@@ -5,6 +5,7 @@ import java.sql.Statement;
 import org.mindrot.jbcrypt.BCrypt;
 
 import java.sql.DriverManager;
+import java.sql.ResultSet;
 import java.sql.SQLException;
 
 public class Database {
@@ -25,7 +26,7 @@ public class Database {
 	}
 	
 	static public boolean connectUser(String username, String password) throws SQLException{
-		String req = "SELECT username, password FROM \"users\" WHERE username='"+username+"';";
+		String req = "SELECT username, password FROM \"User\" WHERE username='"+username+"';";
 		Statement s = conn.createStatement();
 		java.sql.ResultSet result = s.executeQuery(req);
 		result.next();
@@ -39,9 +40,29 @@ public class Database {
 	
 	static public void addUser(String username, String password) throws SQLException{
 		String hashed = BCrypt.hashpw(password, BCrypt.gensalt());
-		String req = "INSERT INTO users VALUES('"+username+"','"+hashed+"');";
+		String req = "INSERT INTO User VALUES('"+username+"','"+hashed+"');";
 		Statement s = conn.createStatement();
 		s.executeUpdate(req);
+	}
+	
+	static public String[][] getResa() throws SQLException{
+		int i = 0;
+		String req = "SELECT nom, prenom, matricule, datedebut, datefin, prix FROM \"Resa\" NATURAL JOIN \"Client\"";
+		Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
+		java.sql.ResultSet result = s.executeQuery(req);
+		result.last();
+		String[][] resa = new String[result.getRow()][5];
+		result.beforeFirst();
+		while(result.next()){
+			resa[i][0] = result.getString(1).toUpperCase() + " " + result.getString(2);		
+			resa[i][1] = result.getString(3);
+			resa[i][2] = result.getDate(4).toString();
+			resa[i][3] = result.getDate(5).toString();
+			resa[i][4] = String.valueOf(result.getFloat(6));
+			System.err.println(resa[i][0]);
+			i++;
+		}
+		return resa;
 	}
 	
 	public static void main(String[] args){

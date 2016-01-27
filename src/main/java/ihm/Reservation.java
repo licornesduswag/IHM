@@ -1,11 +1,15 @@
 package ihm;
 
 import java.awt.EventQueue;
+import java.sql.SQLException;
+
 import javax.swing.JFrame;
 import java.awt.Color;
 import javax.swing.JScrollPane;
 import javax.swing.JButton;
 import javax.swing.JTable;
+
+import db.Database;
 
 public class Reservation extends JFrame {
 	private static final long serialVersionUID = 1L;
@@ -32,10 +36,14 @@ public class Reservation extends JFrame {
 		scrollPane.setBounds(10, 10, 1244, 664);
 		getContentPane().add(scrollPane);
 		String[] columns = {"Client", "Immatriculation","Date début", "Date fin", "Prix"};	
-		String[][] data = {
-			    {"Kathy", "AA-123-ZZ", "12/02/2016", "15/02/2016", "42€"},
-			    {"Marc", "GG-000-GG", "13/03/2016", "15/04/2016", "150€"}};
-		table = new JTable(data, columns);
+		String[][] data;
+		try {
+			Database.db_connect();
+			data = Database.getResa();
+			table = new JTable(data, columns);
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}		
 		table.setBounds(10, 11, 1244, 707);
 		table.setRowHeight(32);
 		table.setAutoCreateRowSorter(true);
