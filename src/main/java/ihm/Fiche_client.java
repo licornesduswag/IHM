@@ -73,7 +73,7 @@ public class Fiche_client extends JFrame implements ActionListener {
 		this.setIconImage(new ImageIcon("car.gif").getImage());
 		this.setTitle("Location de voitures - Reservation");	
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.DARK_GRAY);
+		contentPane.setBackground(new Color(65, 105, 225));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
@@ -85,7 +85,7 @@ public class Fiche_client extends JFrame implements ActionListener {
 		
 		JLabel lblNom = new JLabel("Nom");
 		lblNom.setForeground(Color.WHITE);
-		lblNom.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblNom.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblNom.setBounds(57, 64, 46, 14);
 		contentPane.add(lblNom);
 		
@@ -95,33 +95,42 @@ public class Fiche_client extends JFrame implements ActionListener {
 		textField_1.setColumns(10);
 		
 		JLabel lblPrnom = new JLabel("Pr\u00E9nom");
-		lblPrnom.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblPrnom.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblPrnom.setForeground(Color.WHITE);
-		lblPrnom.setBounds(366, 64, 46, 14);
+		lblPrnom.setBounds(366, 64, 67, 14);
 		contentPane.add(lblPrnom);
 		
 		JLabel lblDateDeNaissance = new JLabel("Date de naissance");
-		lblDateDeNaissance.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblDateDeNaissance.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblDateDeNaissance.setForeground(Color.WHITE);
-		lblDateDeNaissance.setBounds(119, 140, 111, 14);
+		lblDateDeNaissance.setBounds(119, 139, 151, 14);
 		contentPane.add(lblDateDeNaissance);
 		
 		btnEnregistrer = new JButton("Enregistrer");
-		btnEnregistrer.setBounds(560, 432, 89, 23);
+		btnEnregistrer.setFont(new Font("Calibri", Font.PLAIN, 14));
+		btnEnregistrer.setBackground(new Color(65, 105, 225));
+		btnEnregistrer.setForeground(new Color(65, 105, 225));
+		btnEnregistrer.setBounds(541, 432, 108, 23);
 		btnEnregistrer.addActionListener(this);
 		contentPane.add(btnEnregistrer);
 		
 		comboBox_1 = new JComboBox();
+		comboBox_1.setFont(new Font("Calibri", Font.PLAIN, 14));
+		comboBox_1.setForeground(new Color(65, 105, 225));
 		comboBox_1.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		comboBox_1.setBounds(305, 137, 40, 20);
 		contentPane.add(comboBox_1);
 		
 		comboBox_2 = new JComboBox();
+		comboBox_2.setForeground(new Color(65, 105, 225));
+		comboBox_2.setFont(new Font("Calibri", Font.PLAIN, 14));
 		comboBox_2.setModel(new DefaultComboBoxModel(new String[] {"Janvier", "F\u00E9vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Ao\u00FBt", "Septembre", "Octobre", "Novembre", "D\u00E9cembre"}));
 		comboBox_2.setBounds(366, 137, 86, 20);
 		contentPane.add(comboBox_2);
 		
 		comboBox_3 = new JComboBox();
+		comboBox_3.setFont(new Font("Calibri", Font.PLAIN, 14));
+		comboBox_3.setForeground(new Color(65, 105, 225));
 		comboBox_3.setModel(new DefaultComboBoxModel(new String[] {"1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"}));
 		comboBox_3.setBounds(474, 137, 67, 20);
 		contentPane.add(comboBox_3);
@@ -132,9 +141,9 @@ public class Fiche_client extends JFrame implements ActionListener {
 		textField_2.setColumns(10);
 		
 		JLabel lblLieuDeNaisssance = new JLabel("Lieu de naisssance");
-		lblLieuDeNaisssance.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblLieuDeNaisssance.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblLieuDeNaisssance.setForeground(Color.WHITE);
-		lblLieuDeNaisssance.setBounds(119, 201, 111, 14);
+		lblLieuDeNaisssance.setBounds(119, 200, 151, 14);
 		contentPane.add(lblLieuDeNaisssance);
 		
 		textField_3 = new JTextField();
@@ -153,41 +162,47 @@ public class Fiche_client extends JFrame implements ActionListener {
 		textField_6.setColumns(10);
 		
 		JLabel lblNPermis = new JLabel("N\u00B0 Permis");
-		lblNPermis.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblNPermis.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblNPermis.setForeground(Color.WHITE);
 		lblNPermis.setHorizontalAlignment(SwingConstants.LEFT);
-		lblNPermis.setBounds(217, 326, 67, 14);
+		lblNPermis.setBounds(198, 326, 86, 14);
 		contentPane.add(lblNPermis);
 		
 		JLabel lblDateDlivrance = new JLabel("Date obtention");
 		lblDateDlivrance.setForeground(Color.WHITE);
-		lblDateDlivrance.setFont(new Font("Calibri", Font.PLAIN, 14));
-		lblDateDlivrance.setBounds(119, 269, 97, 14);
+		lblDateDlivrance.setFont(new Font("Calibri", Font.PLAIN, 18));
+		lblDateDlivrance.setBounds(119, 269, 135, 14);
 		contentPane.add(lblDateDlivrance);
 		
 		JLabel lblNewLabel = new JLabel("Lieu d'obtention");
-		lblNewLabel.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblNewLabel.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblNewLabel.setForeground(Color.WHITE);
-		lblNewLabel.setBounds(54, 390, 99, 14);
+		lblNewLabel.setBounds(54, 390, 134, 14);
 		contentPane.add(lblNewLabel);
 		
 		JLabel lblVilleDlivrance = new JLabel("Ville d'obtention");
-		lblVilleDlivrance.setFont(new Font("Calibri", Font.PLAIN, 14));
+		lblVilleDlivrance.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblVilleDlivrance.setForeground(Color.WHITE);
-		lblVilleDlivrance.setBounds(372, 390, 97, 14);
+		lblVilleDlivrance.setBounds(366, 390, 120, 14);
 		contentPane.add(lblVilleDlivrance);
 		
 		comboBox_4 = new JComboBox();
+		comboBox_4.setForeground(new Color(65, 105, 225));
+		comboBox_4.setFont(new Font("Calibri", Font.PLAIN, 14));
 		comboBox_4.setModel(new DefaultComboBoxModel(new String[] {"1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12", "13", "14", "15", "16", "17", "18", "19", "20", "21", "22", "23", "24", "25", "26", "27", "28", "29", "30", "31"}));
 		comboBox_4.setBounds(305, 266, 40, 20);
 		contentPane.add(comboBox_4);
 		
 		comboBox_5 = new JComboBox();
+		comboBox_5.setFont(new Font("Calibri", Font.PLAIN, 14));
+		comboBox_5.setForeground(new Color(65, 105, 225));
 		comboBox_5.setModel(new DefaultComboBoxModel(new String[] {"Janvier", "F\u00E9vrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Ao\u00FBt", "Septembre", "Octobre", "Novembre", "D\u00E9cembre"}));
 		comboBox_5.setBounds(366, 266, 86, 20);
 		contentPane.add(comboBox_5);
 		
 		comboBox_6 = new JComboBox();
+		comboBox_6.setForeground(new Color(65, 105, 225));
+		comboBox_6.setFont(new Font("Calibri", Font.PLAIN, 14));
 		comboBox_6.setModel(new DefaultComboBoxModel(new String[] {"1960", "1961", "1962", "1963", "1964", "1965", "1966", "1967", "1968", "1969", "1970", "1971", "1972", "1973", "1974", "1975", "1976", "1977", "1978", "1979", "1980", "1981", "1982", "1983", "1984", "1985", "1986", "1987", "1988", "1989", "1990", "1991", "1992", "1993", "1994", "1995", "1996", "1997", "1998", "1999", "2000", "2001", "2002", "2003", "2004", "2005", "2006", "2007", "2008", "2009", "2010", "2011", "2012", "2013", "2014", "2015", "2016", "2017", "2018"}));
 		comboBox_6.setBounds(474, 266, 67, 20);
 		contentPane.add(comboBox_6);

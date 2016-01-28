@@ -41,12 +41,15 @@ public class Login extends JFrame {
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 400, 600);
 		contentPane = new JPanel();
-		contentPane.setBackground(Color.DARK_GRAY);
+		contentPane.setForeground(new Color(255, 255, 255));
+		contentPane.setBackground(new Color(65, 105, 225));
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 		
 		user = new JTextField();
+		user.setForeground(new Color(0, 0, 0));
+		user.setBackground(new Color(255, 255, 255));
 		user.setHorizontalAlignment(SwingConstants.CENTER);
 		user.setFont(new Font("Segoe UI", Font.PLAIN, 14));
 		user.setBounds(125, 125, 150, 30);
@@ -54,27 +57,30 @@ public class Login extends JFrame {
 		user.setColumns(10);
 		
 		pass = new JPasswordField();
+		pass.setBackground(new Color(255, 255, 255));
 		pass.setHorizontalAlignment(SwingConstants.CENTER);
 		pass.setBounds(125, 200, 150, 30);
 		contentPane.add(pass);
 		
 		JLabel lblId = new JLabel("Identifiant");
-		lblId.setForeground(Color.WHITE);
+		lblId.setForeground(new Color(238, 232, 170));
 		lblId.setFont(new Font("Calibri", Font.PLAIN, 18));
-		lblId.setBackground(Color.WHITE);
+		lblId.setBackground(new Color(255, 255, 255));
 		lblId.setHorizontalAlignment(SwingConstants.CENTER);
 		lblId.setBounds(125, 100, 150, 14);
 		contentPane.add(lblId);
 		
 		lblPass = new JLabel("Mot de passe");
 		lblPass.setHorizontalAlignment(SwingConstants.CENTER);
-		lblPass.setForeground(Color.WHITE);
+		lblPass.setForeground(new Color(238, 232, 170));
 		lblPass.setFont(new Font("Calibri", Font.PLAIN, 18));
 		lblPass.setBackground(Color.WHITE);
 		lblPass.setBounds(125, 175, 150, 14);
 		contentPane.add(lblPass);
 		
 		connectButton = new JButton("Connexion");
+		connectButton.setForeground(new Color(65, 105, 225));
+		connectButton.setBackground(new Color(65, 105, 225));
 		connectButton.setFont(new Font("Calibri", Font.PLAIN, 18));
 		connectButton.setBounds(125, 275, 150, 30);
 		contentPane.add(connectButton);

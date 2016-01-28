@@ -12,6 +12,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTable;
 
 import db.Database;
+import java.awt.Font;
 
 public class ListeReservations extends JFrame implements ActionListener {
 	private static final long serialVersionUID = 1L;
@@ -24,32 +25,44 @@ public class ListeReservations extends JFrame implements ActionListener {
 	String[] columns = {"ID", "Nom", "Prenom", "Immatriculation","Date début", "Date fin"};	
 	JScrollPane scrollPane = new JScrollPane();
 	public ListeReservations() {
-		getContentPane().setBackground(Color.DARK_GRAY);
+		getContentPane().setBackground(new Color(65, 105, 225));
 		getContentPane().setLayout(null);
 		this.setIconImage(new ImageIcon("car.gif").getImage());
 		this.setTitle("Location de voitures - Login");		
 		
-		scrollPane.setBounds(10, 10, 1244, 664);
+		scrollPane.setBounds(10, 11, 1244, 664);
 		getContentPane().add(scrollPane);
 		
 		refreshData();
 		
 		ajout = new JButton("Ajouter Réservation");
+		ajout.setForeground(new Color(65, 105, 225));
+		ajout.setFont(new Font("Calibri", Font.PLAIN, 14));
+		ajout.setBackground(new Color(65, 105, 225));
 		ajout.setBounds(10, 686, 200, 32);
 		getContentPane().add(ajout);
 		ajout.addActionListener(this);
 		
 		edit = new JButton("Modifier Réservation");
+		edit.setForeground(new Color(70, 130, 180));
+		edit.setFont(new Font("Calibri", Font.PLAIN, 14));
+		edit.setBackground(new Color(65, 105, 225));
 		edit.setBounds(220, 686, 200, 32);
 		getContentPane().add(edit);
 		edit.addActionListener(this);
 		
 		cancel = new JButton("Annuler réservation");
+		cancel.setFont(new Font("Calibri", Font.PLAIN, 14));
+		cancel.setForeground(new Color(65, 105, 225));
+		cancel.setBackground(new Color(65, 105, 225));
 		cancel.setBounds(430, 686, 200, 32);
 		getContentPane().add(cancel);
 		cancel.addActionListener(this);
 		
 		refresh = new JButton("Rafaîchir");
+		refresh.setForeground(new Color(65, 105, 225));
+		refresh.setFont(new Font("Calibri", Font.PLAIN, 14));
+		refresh.setBackground(new Color(65, 105, 225));
 		refresh.setBounds(1055, 686, 200, 32);
 		getContentPane().add(refresh);
 		refresh.addActionListener(this);
