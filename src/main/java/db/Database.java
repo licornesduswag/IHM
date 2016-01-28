@@ -51,18 +51,19 @@ public class Database {
 	//Renvoie la liste des réservations pour les afficher	
 	static public String[][] getResa() throws SQLException{
 		int i = 0;
-		String req = "SELECT nom, prenom, matricule, datedebut, datefin, prix FROM \"Resa\" NATURAL JOIN \"Client\"";
+		String req = "SELECT idresa, nom, prenom, matricule, datedebut, datefin FROM \"Resa\" NATURAL JOIN \"Client\"";
 		Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		java.sql.ResultSet result = s.executeQuery(req);
 		result.last();
-		String[][] resa = new String[result.getRow()][5];
+		String[][] resa = new String[result.getRow()][6];
 		result.beforeFirst();
 		while(result.next()){
-			resa[i][0] = result.getString(1).toUpperCase() + " " + result.getString(2);		
-			resa[i][1] = result.getString(3);
-			resa[i][2] = result.getDate(4).toString();
-			resa[i][3] = result.getDate(5).toString();
-			resa[i][4] = String.valueOf(result.getFloat(6));
+			resa[i][0] = String.valueOf(result.getInt(1));
+			resa[i][1] = result.getString(2);
+			resa[i][2] = result.getString(3);
+			resa[i][3] = result.getString(4);
+			resa[i][4] = result.getDate(5).toString();
+			resa[i][5] = result.getDate(6).toString();
 			i++;
 		}
 		return resa;
@@ -71,26 +72,58 @@ public class Database {
 	//Renvoie la liste des plaques d'immatriculation
 	static public String[] getMatricule() throws SQLException{
 		int i = 0;
-		String req = "SELECT matricule, marque FROM \"Voiture\"";
+		String req = "SELECT matricule FROM \"Voiture\"";
 		Statement s = conn.createStatement(ResultSet.TYPE_SCROLL_SENSITIVE, ResultSet.CONCUR_READ_ONLY);
 		java.sql.ResultSet result = s.executeQuery(req);
 		result.last();
 		String[] matricule = new String[result.getRow()];
 		result.beforeFirst();
 		while(result.next()){
-			matricule[i] = result.getString(2) + " - " + result.getString(1);
+			matricule[i] = result.getString(1);
 			i++;
 		}
 		return matricule;
 	}
 	
-	public static void main(String[] args){
-		db_connect();
-		try {
-			System.out.println(connectUser("maximusk", "supersafepassword"));
-		} catch (SQLException e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
+	static public boolean addResa(String nom, String prenom, String matricule, java.sql.Date datedebut, java.sql.Date datefin) throws SQLException{
+		String req1 = "SELECT numpermis FROM \"Client\" WHERE (prenom = '"+prenom+"' AND nom = '"+nom+"');";
+		Statement s = conn.createStatement();
+		ResultSet result = s.executeQuery(req1);
+		if(!result.next()){
+			return false;
 		}
+		String numpermis = result.getString(1);
+		String req2 = "INSERT INTO \"Resa\" (numpermis, matricule, datedebut, datefin) VALUES ('"+numpermis+"','"+matricule+"','"+datedebut+"','"+datefin+"');";
+		s.executeUpdate(req2);
+		return true;
+	}
+	
+	static public void editResa(int id, String nom, String prenom, String matricule, java.sql.Date datedebut, java.sql.Date datefin) throws SQLException{
+		String req1 = "SELECT numpermis FROM \"Client\" WHERE (prenom = '"+prenom+"' AND nom = '"+nom+"');";
+		Statement s = conn.createStatement();
+		ResultSet result = s.executeQuery(req1);
+		result.next();
+		String numpermis = result.getString(1);
+		String req2 = "UPDATE \"Resa\" SET numpermis = '"+numpermis+"',matricule = '"+matricule+"', datedebut = '"+datedebut+"', datefin = '"+datefin+"' WHERE idresa = '"+id+"';";
+		s.executeUpdate(req2);
+	}
+	
+	static public void removeResa(int id) throws SQLException{
+		String req = "DELETE FROM \"Resa\" WHERE idresa = '"+id+"';";
+		Statement s = conn.createStatement();
+		s.executeUpdate(req);
+	}
+	
+	static public boolean addClient(String nom, String prenom, java.sql.Date dateNaissance, String lieuNaissance,
+			String numPermis, java.sql.Date datePermis, String lieuPermis, String villePermis ) throws SQLException{
+		String req1 = "SELECT * FROM \"Client\" WHERE (prenom = '"+prenom+"' AND nom = '"+nom+"');";
+		Statement s = conn.createStatement();
+		ResultSet result = s.executeQuery(req1);
+		if (result.next()){
+			return false;
+		}
+		String req2 = "INSERT INTO \"Client\" VALUES ('"+nom+"','"+prenom+"','"+dateNaissance+"','"+lieuNaissance+"','"+numPermis+"','"+datePermis+"','"+lieuPermis+"','"+villePermis+"');";
+		s.executeUpdate(req2);
+		return true;
 	}
 }

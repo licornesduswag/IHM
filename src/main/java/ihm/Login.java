@@ -1,5 +1,4 @@
 package ihm;
-import java.awt.EventQueue;
 
 import javax.swing.JFrame;
 import javax.swing.JPanel;
@@ -17,6 +16,7 @@ import java.sql.SQLException;
 import javax.swing.SwingConstants;
 import javax.swing.JPasswordField;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
@@ -27,29 +27,10 @@ public class Login extends JFrame {
 	private JPasswordField pass;
 	private JLabel lblPass;
 	private JButton connectButton;
-
-	public static void main(String[] args) {
-		EventQueue.invokeLater(new Runnable() {
-			public void run() {
-				try {
-					final Login frame = new Login();
-					frame.setVisible(true);
-					frame.connectButton.addActionListener(new ActionListener() {			
-						public void actionPerformed(ActionEvent e) {
-								if(frame.connect()){
-									ListeReservations lr = new ListeReservations();
-									lr.setVisible(true);
-									frame.dispose();
-								}
-						}
-					});
-				} catch (Exception e) {
-					e.printStackTrace();
-				}
-			}
-		});
+	
+	public void wrongId(){
+		JOptionPane.showMessageDialog(new JFrame(), "Le nom d'utilisateur et/ou le mot de passe est erroné", "Erreur - Connexion", JOptionPane.ERROR_MESSAGE);
 	}
-
 	/**
 	 * Create the frame.
 	 */
@@ -97,6 +78,18 @@ public class Login extends JFrame {
 		connectButton.setFont(new Font("Calibri", Font.PLAIN, 18));
 		connectButton.setBounds(125, 275, 150, 30);
 		contentPane.add(connectButton);
+		this.connectButton.addActionListener(new ActionListener() {			
+			public void actionPerformed(ActionEvent e) {
+					if(connect()){
+						ListeReservations lr = new ListeReservations();
+						lr.setVisible(true);
+						dispose();
+					}
+					else{
+						wrongId();
+					}
+			}
+		});
 	}
 
 	public boolean connect(){
